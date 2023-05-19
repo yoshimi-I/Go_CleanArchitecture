@@ -31,10 +31,8 @@ func OpenDB() *gorm.DB {
 }
 
 func CloseDB(db *gorm.DB) {
-	dbSQL, err := db.DB()
-	if err != nil {
+	dbSQL, _ := db.DB()
+	if err := dbSQL.Close(); err != nil {
 		log.Fatalln(err)
 	}
-	dbSQL.Close()
-	fmt.Println("DB切断成功")
 }
